@@ -1,0 +1,236 @@
+		.odd{
+			background:#F5EAEF;
+		}
+		.grey{
+			background:#efefef;
+		}
+		.even{
+			background:white;
+		}
+
+         #EstAct .segment {
+            height:100%;
+            overflow:auto;
+         }
+
+
+         #Developer .tableHeader .headerspace{
+  			width:43%;
+  			text-align:righ;
+            }
+			
+        #Developer .tableHeader .headeritem{
+  			width:19%;
+  			text-align:righ;
+			}
+
+        #Developer .segment {
+  		height:400px;
+  		overflow:auto;
+			}
+
+
+        #WorkHours .segment {
+  			height:400px;
+  			overflow:auto;
+			}	
+			
+	#WorkHours .tableHeader .headerspace{
+  			width:43%;
+  			text-align:center;
+            }
+			
+	#WorkHours .tableHeader .headeritem{
+  			width:19%;
+  			text-align:right;
+			}
+
+        #Recent .segment {
+  			height:400px;
+  			overflow:auto;
+			}
+
+	#ToDo .segment {
+  			height:400px;
+  			overflow:auto;
+			}
+	
+
+		.tableHeader{
+			background:#babae6;
+			color:black;
+			font-size:12px;
+			font-weight:bold;
+		}
+
+		div.left{
+			float:left;
+		}
+
+		div.right{
+			float:right;
+		}
+
+		div.clear{
+			clear:both;
+			padding:0px;
+		}
+
+		.ui-tabs .ui-tabs-panel{
+			padding:0 !important;
+		}
+		
+		div.frm {
+			background:#efefff;
+		}
+
+		div.tab {
+			height:20px;
+			padding:5px 10px;
+			text-align:center;
+			border:1px outset white;
+			border-bottom:none;
+			background:#efefff;
+			position:relative;
+			line-height:20px;
+			font-weight:bold;
+			cursor:pointer;
+			-moz-border-radius:8px 8px 0px 0px;
+		}
+
+		div.tab:hover {
+			color:gray;
+		}
+
+		div.tabSelected {
+			height:20px;
+			padding:5px 10px;
+			-moz-border-radius:8px 8px 0px 0px;
+			border:1px outset white;
+			border-bottom:2px solid #efefff;
+			position:relative;
+			background:#efefff;
+			color:blue;
+			font-weight:bold;
+			line-height:20px;
+			cursor:default;
+			z-index:3;
+		}
+
+		div.tabForms {
+		
+			-moz-border-radius:8px 8px 0px 0px;
+			height:20px;
+			text-align:center;
+			border:1px outset white;
+			background:#A8B7C6;
+			position:relative;
+			line-height:20px;
+			font-weight:bold;
+			cursor:pointer;
+			color:white;
+		}
+
+		div.tabFormsSelected {
+		
+			-moz-border-radius:8px 8px 0px 0px;
+			height:20px;
+			border:1px outset white;
+			position:relative;
+			background:#efefff;
+			color:#000000;
+			font-weight:bold;
+			line-height:20px;
+			cursor:default;
+			z-index:3;
+		}
+
+		div.clickable{
+			cursor:pointer;
+			font-weight:bold;
+		}
+
+		div.frmFrame {
+			padding:5px;
+			border:2px outset white;
+			margin-top:-2px;
+			background:#efefff;
+		}
+
+		div.titleSeg {
+			background:#C2D8EA;
+			border:1px solid gray;
+			color:#000000;
+			display:block;
+			font-size:10pt;
+			font-weight:bold;
+			margin-bottom:10px;
+		}
+
+		div.segment {
+			background:#EFEFFF none repeat scroll 0 0;
+			border:2px outset white;
+			border-top:0px;
+			margin-top:-2px;
+			padding:5px;
+			position:relative;
+			text-align:center;
+		}
+
+
+		div.tabTitle {
+			vertical-align:middle;
+			text-align:center;
+			font-size:8pt;
+			font-weight:bold;
+			height:25px;
+			-moz-border-radius:8px 8px 0px 0px;
+			border:2px outset white;
+			border-bottom:1px solid #efefff;
+			position:relative;
+			background:#7676ce;
+			color:white;
+			font-weight:bold;
+			line-height:25px;
+			cursor:default;
+			z-index:3;
+		}
+		
+		div.segmentRed {
+			background:#F5EAEF none repeat scroll 0 0;
+			border:2px outset white;
+			border-top:0px;
+			margin-top:-2px;
+			padding:5px;
+			position:relative;
+			text-align:center;
+		}
+		
+		div.tabTitleRed {
+			vertical-align:middle;
+			text-align:center;
+			font-size:8pt;
+			font-weight:bold;
+			height:25px;
+			-moz-border-radius:8px 8px 0px 0px;
+			border:2px outset white;
+			border-bottom:1px solid #efefff;
+			position:relative;
+			background:#9D3363;
+			color:white;
+			font-weight:bold;
+			line-height:25px;
+			cursor:default;
+			z-index:3;
+		}
+
+		div#pop-up {
+		  display: none;
+		  position: absolute;
+		  width: 100px;
+		  padding: 5px;
+		  background: #eeeeee;
+		  color: #000000;
+		  border: 1px solid #1a1a1a;
+		  font-size: 90%;
+		}

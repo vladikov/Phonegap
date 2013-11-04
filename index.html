@@ -1,0 +1,359 @@
+<!DOCTYPE HTML>
+<html>
+ <head>
+  <title>Tracking App Mobile 1.0</title>
+ <!--<script type="text/javascript" charset="utf-8" src="cordova.js"></script> -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Bootstrap -->
+    <link href="css/bootstrap.min.css" rel="stylesheet" media="screen" />
+    
+    <!-- Mobile JQuery  -->
+    <link rel="stylesheet" href="css/jquery.mobile-1.3.2.min.css" />
+   <!-- <link rel="stylesheet" href="css/jquery.mobile-1.0.1.min.css" />   selector  -->
+   
+    <style type="text/css">
+        .bgimg {
+                background-image : url(images/MainBanner.png);
+        }
+        .oad   {
+                background:#F5EAEF;}
+    </style> 
+       
+ </head>
+ 
+ <body>
+
+    <!-- 1. Navigation Bar -->
+     <div id="menuSuper" class="navbar navbar-inverse navbar-static-top">
+    	<div class="container">
+    	
+    		<a href="#" class="navbar-brand">Tracking Application</a>
+    		
+    		<button id="butSpam" class="navbar-toggle" data-toggle="collapse" data-target=".navHeaderCollapse" disabled>
+                <spam class="icon-bar"></spam>
+                <spam class="icon-bar"></spam>
+                <spam class="icon-bar"></spam>
+            </button>
+
+            <div id="menuMain" class="collapse navbar-collapse navHeaderCollapse">
+            
+                <ul class = "nav navbar-nav navbar-right">
+    		
+    			<li><a id="liKPI" href="#" onclick="OnLiClicked(urlKpiArr[0]);">KPI</a></li>
+                <li><a id="liMain" href="#" onclick="OnLiClicked(urlArray[0]);">Main</a></li>
+                <li class="dropdown">
+                
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Projects<b class="caret"></b></a>
+
+                    <ul class="dropdown-menu">
+                    
+                        <li><a id="liNewProject" href="#" onclick="OnLiClicked(urlArray[1])";>New Project</a></li>
+                        <li><a id="liTrackingProjects" href="#" onclick="OnLiClicked(urlArray[2]);">Tracking Projects</a></li>
+
+                    </ul>
+                </li>
+                <li><a id="liReports" href="#" onclick="OnLiClicked(urlArray[3]);">Reports</a></li>
+                <li><a id="liBugs" href="#" onclick="OnLiClicked(urlArray[4]);">Bugs</a></li>
+                <li id="butLogout"><a href="#">Logout</a></li>
+				<li id="butToDo"><a href="#">Todo</a></li>
+    		</ul>
+            </div>	
+            
+    	</div>
+    </div>
+    <!-- 2. Dynamic Frame -->
+    <div id="divDynFrame" class="container" height="100%"></div>
+    <br>
+	
+	<div id="placeholder" class="container" height="100%"></div>
+
+    <div id="divTodoTbl" height="100%">
+         <table id="tblToDoList" width="100%" border="1"></table>
+    </div>
+	
+      <!-- 3. Login screen -->
+      <div id="divLogin" style="border:border-width=1px">
+       <form id="Form1" method="post" action="http://saas.frontech.ca/trackingapp/default.cfm?fuseaction=Login" style="display: inline">
+		<style>
+			.LoginHeader{
+				height: 59px;
+				background-image: url(images/common/login-header.gif);
+				font-size: 19px;
+				font-family: "Franklin Gothic Medium", Verdana, Geneva, Arial, Helvetica, sans-serif;
+				color: #ffffff;
+				padding-left: 75px;
+			}
+		</style>
+
+			<table cellspacing="0" cellpadding="7" style="width: 90%;border:1px solid #C3C3C3;">
+
+				<tr>
+					<td colspan="2" class="LoginHeader">
+						Login To Tracking App
+					</td>
+				</tr>
+
+				<tr>
+					<td colspan="2" style="background-color:#E4E4E4">
+						<p>Enter the login name into "Login" and password into the "Password" fields respectively. Then click "Login".</p>
+					</td>
+				</tr>
+
+				<tr>
+					<td style="width: 100px;">
+						<label for="username"> Login</label>
+					</td>
+					<td style="width: 350px;text-align:center;">
+						<input id="idUsername" class="input" type="text" name="username" size=16 maxlength="20" style="width: 70%" value="">
+					</td>
+				</tr>
+
+				<tr>
+					<td style="width: 100px;">
+						<label for="password"> Password</label>
+					</td>
+					<td  style="width: 350px;text-align:center;">
+						<input id="idPassword" class="input" type="password" name="password"  size=16 maxlength="32" style="width: 70%" value="">
+					</td>
+				</tr>
+				<tr>
+					<td colspan="2" align="right">
+						<button type="button" id="butLogin1" class="button" style="width:110px;border-left:1 solid #D2E9FF;border-top:1 solid #D2E9FF;border-right:1 solid #0F80C4;border-bottom:1px solid #0F80C4;background-color:white;color:black" onclick = "OnSubmit()";>
+							<img src="images/butticon/xp/login.gif" width="16" height="16" border="0" align="absmiddle">
+							Login
+						</button>
+					</td>
+				</tr>
+
+			</table>
+			</form>
+     </div>
+  
+      <script src="js/jquery-2.0.3.min.js"></script>
+      <script src="js/jquery.mobile-1.3.2.min.js"></script>   
+      <script src="js/bootstrap.js"></script>
+ <!--     <script src = "http://vlad:8080/target/target-script-min.js#anonymous"></script> -->
+      <script type= "text/javascript">
+
+          //    3. Login functions
+
+          function OnLoginSelected() {
+              //   console.log("OnLoginSelected");
+              $("#divLogin").toggleClass("display");
+              $("#divLogin").show("fast");
+          }
+
+          function OnSubmit() {
+          //alert($('#LoginForm').attr('action'));
+              $.ajax({
+                  type: 'POST',
+                  url: $('#LoginForm').attr('action'),
+                  data: $('#LoginForm').serialize(),
+                  success: function (data) {
+                      //alert("OnSubmit! = " + data);
+                      $("#divLogin").hide("fast");
+                      $("#butSpam").button("enable");
+                      $("#menuSuper").show("fast");
+
+                  },
+                  error: function (xhr, ajaxOptions, thrownError) {
+                      alert("Oops!");
+                  }
+              });
+          }
+
+          // On Login submit functions
+
+          var count = 0;
+          var urlKpiArr = new Array();
+          var urlArray  = new Array();
+        //  var siteHost = "vlad:8500";// DEV
+          var siteHost = "saas.frontech.ca";// PROD
+        //  var host = "http://" + siteHost; 
+
+            // DEV
+//          urlKpiArr[0] = "http://"+siteHost+":8500/TrackingApp/service.cfm?action=getKPIDevActivities";
+//          urlKpiArr[1] = "http://"+siteHost+":8500/TrackingApp/service.cfm?action=getKPIWorkHrs";
+//          urlKpiArr[2] = "http://"+siteHost+":8500/TrackingApp/service.cfm?action=getKPIRecentActivities";
+//          urlKpiArr[3] = "http://"+siteHost+":8500/TrackingApp/service.cfm?action=getKPIAlertsBugReports";
+//          urlKpiArr[4] = "http://"+siteHost+":8500/TrackingApp/service.cfm?action=getKPIToDo";
+//          urlKpiArr[5] = "http://"+siteHost+":8500/TrackingApp/service.cfm?action=getKPICorpEfficiency";
+//          urlKpiArr[6] = "http://"+siteHost+":8500/TrackingApp/service.cfm?action=getKPITAllProjects";
+//           urlArray[0] = "http://"+siteHost+":8500/TrackingApp/default.cfm?fuseaction=AdminTools";  // Main
+//           urlArray[1] = "http://"+siteHost+":8500/TrackingApp/service.cfm?action=getProjects_AddNewProject"; //New Project
+//           urlArray[2] = "http://"+siteHost+":8500/TrackingApp/service.cfm?action=getProjects_Tracking"; //Not OK
+//           urlArray[3] = "http://"+siteHost+":8500/TrackingApp/service.cfm?action=getReport_UserActivity";
+//           urlArray[4] = "http://"+siteHost+":8500/TrackingApp/default.cfm?fuseaction=Bugreport"; // Bug Report
+
+          // PROD
+          urlKpiArr[0] = "http://saas.frontech.ca/trackingapp/service.cfm?action=getKPIDevActivities";
+          urlKpiArr[1] = "http://saas.frontech.ca/trackingapp/service.cfm?action=getKPIWorkHrs";
+          urlKpiArr[2] = "http://saas.frontech.ca/trackingapp/service.cfm?action=getKPIRecentActivities";
+          urlKpiArr[3] = "http://saas.frontech.ca/trackingapp/service.cfm?action=getKPIAlertsBugReports";
+          urlKpiArr[4] = "http://saas.frontech.ca/trackingapp/service.cfm?action=getKPIToDo";
+          urlKpiArr[5] = "http://saas.frontech.ca/trackingapp/service.cfm?action=getKPICorpEfficiency";
+          urlKpiArr[6] = "http://saas.frontech.ca/trackingapp/service.cfm?action=getKPITAllProjects";
+           urlArray[0] = "http://saas.frontech.ca/trackingapp/default.cfm?fuseaction=AdminTools";  // Main
+           urlArray[1] = "http://saas.frontech.ca/trackingapp/service.cfm?action=getProjects_AddNewProject"; //New Project
+           urlArray[2] = "http://saas.frontech.ca/trackingapp/service.cfm?action=getProjects_Tracking"; //Not OK
+           urlArray[3] = "http://saas.frontech.ca/trackingapp/service.cfm?action=getReport_UserActivity";
+           urlArray[4] = "http://saas.frontech.ca/trackingapp/default.cfm?fuseaction=Bugreport"; // Bug Report
+
+          var max = urlKpiArr.length - 1;
+
+          function GetCountLeft() {
+              count--;
+              if (count < 0) {
+                  count = max;
+              }
+              return count;
+          };
+
+          function GetCountRight() {
+              count++;
+              if (count > max) {
+                  count = 0;
+              }
+              return count;
+          };
+
+
+          $(function () {
+              $("body").on("swiperight", OnRightSwipe);
+          });
+
+          $(function () {
+              $("body").on("swipeleft", OnLeftSwipe);
+          });
+
+          function OnRightSwipe(event) {
+              //console.log("Swipe Right");
+              var i = GetCountRight(count);
+              //console.log(count);
+              NavigateTo(i);
+          };
+
+          function OnLeftSwipe(event) {
+              //console.log("Swipe Left");
+              var i = GetCountLeft(count);
+              //console.log(count);
+              NavigateTo(i);
+          };
+
+          function NavigateTo(i) {
+              $.ajax({
+                  type: "GET",
+                  url: urlKpiArr[i],
+                  datatype: "html",
+                  data: "",
+                  success: function (data) {
+                      $("#divDynFrame").html(data);
+                  }
+              });
+          };
+
+
+          // KPI  liKPI
+
+          function OnLiClicked(item) {
+          //alert(item);
+              $("#menuMain").hide("fast");
+              $.ajax({
+                  type: "GET",
+                  url: item,
+                  datatype: "html",
+                  data: "",
+                  success: function (data) {
+                      //alert("On KPI " + item + " - OK");
+                      //alert(data);
+                      $("#divDynFrame").show("fast");
+                      $("#divDynFrame").html(data);
+                  },
+                  error: function (xhr, ajaxOptions, thrownError) {
+                      alert("KPI - Oops!");
+                  }
+              });
+          }
+          
+              function CreateToDoURL(ip, id){
+               var mid = "/TrackingApp/default.cfm?fuseaction=Tracking&act=manage&uid=";
+              //  var mid = "/TrackingApp/default.cfm?fuseaction=Tracking&act=manageMobile&uid=";
+                var url = ip + mid + id;
+                return url;
+            }
+
+           // var host = "http://vlad:8500/";
+           var host = "http://saas.frontech.ca/"; 
+
+            function CreateTODoTable_1(result){
+                var headers = result["COLUMNS"];
+                var data = result["DATA"];
+                var tbl = $('<table></table>').attr({ id: "tblTodo" });
+                var thr = $('<thead></thead>').appendTo(tbl);
+                var tbd = $('<tbody></tbody>').appendTo(tbl);
+                var row = $('<tr></tr>').appendTo(tbl);
+                $('<th></th>').text("Subject").attr({ align: "left", width: "50%"}).appendTo(row);
+                $('<th></th>').text("Topic Name").attr({ align: "left", width: "50%"}).appendTo(row);
+
+
+                $(data).each(function(index,item){
+                   var adr = CreateToDoURL(host, item[0]);
+                   //alert("adr = " + adr);
+                   var row = $('<tr></tr>').appendTo(tbl);
+
+                   if(index%2 == 0){
+                        row.addClass('oad');
+                   }
+
+                    $('<td></td>').prepend($('<a></a>').attr({ href: adr}).text(item[1])).appendTo(row);
+                    $('<td></td>').text(item[2] ).attr({ align: "left", width: "50%"}).appendTo(row);
+                });
+
+                tbl.appendTo("#placeholder");
+            }
+
+           $(document).ready(function () {
+                $("#butToDo").click(function () {
+                 //  var todo_url = "http://vlad:8500/TrackingApp/service.cfm?action=getToDoList"; // DEV
+                   var todo_url = "http://saas.frontech.ca/TrackingApp/service.cfm?action=getToDoList"; // PROD
+                    //var todo_url = "js/TodoList.json";
+                        $.ajax({
+                        type: "GET",
+                        url: todo_url,
+                        data: "",
+                        datatype: "json",
+                        // to pass extra data in query string
+                        // data:"id="+flickrid+"&lang=en-us&format=json&jsoncallback=?",
+                        success: function (data) {
+                            $("#menuMain").hide("fast");
+                            var c = $.parseJSON(data);
+                            $("#divDynFrame").hide("fast");
+                            $("#placeholder").show("fast");
+                            CreateTODoTable_1(c);
+                        },
+                    });
+                });
+            });
+          
+          $("#butSpam").click(function () {
+
+              $("#divDynFrame").hide("fast");
+              $("#menuSuper").show("fast");
+              $("#menuMain").show("fast");
+              
+              $("#divTodoTbl").hide("fast");  
+              $("#divLogin").hide("fast");
+              $("#placeholder").hide("fast");
+              // $("#butSpam").button("enable");
+          });
+          
+          $("#butLogout").click(function () {
+              $("#divLogin").show("fast");
+	          $("#menuSuper").hide("fast");
+              $("#idUsername").val("");
+              $("#idPassword").val("");
+          });
+          
+      </script>
+    </body>
+</html>
